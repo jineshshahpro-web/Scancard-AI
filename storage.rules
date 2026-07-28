@@ -1,0 +1,29 @@
+rules_version = '2';
+
+// Deploy with: firebase deploy --only storage
+//
+// Card images are stored at card_images/{ownerId}/{contactId}.jpg —
+// only the authenticated owner may read or write within their own
+// folder. Uploads are capped at 5MB and must be an image, matching
+// AppConstants.maxImageSizeBytes on the client.
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /card_images/{ownerId}/{fileName} {
+      allow read, write: if request.auth != null
+        && request.auth.uid == ownerId
+        && request.resource.size < 5 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    match /avatars/{ownerId}/{fileName} {
+      allow read, write: if request.auth != null
+        && request.auth.uid == ownerId
+        && request.resource.size < 2 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}

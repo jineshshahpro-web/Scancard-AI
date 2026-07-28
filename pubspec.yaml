@@ -1,0 +1,160 @@
+name: scancard_ai
+description: >
+  ScanCard AI — scan business cards, extract contact details with ML Kit OCR
+  and AI-assisted parsing, and manage them in a fast, offline-capable,
+  cross-platform contact book.
+publish_to: "none"
+version: 1.0.0+1
+
+environment:
+  sdk: ">=3.4.0 <4.0.0"
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # ────────────────────────────────────────────────────────────────
+  # State management — Riverpod (chosen over Provider/Bloc for its
+  # compile-time safety, testability and first-class async support)
+  # ────────────────────────────────────────────────────────────────
+  flutter_riverpod: ^2.5.1
+  riverpod_annotation: ^2.3.5
+
+  # ────────────────────────────────────────────────────────────────
+  # Firebase
+  # ────────────────────────────────────────────────────────────────
+  firebase_core: ^3.1.0
+  firebase_auth: ^5.1.0
+  cloud_firestore: ^5.0.1
+  firebase_storage: ^12.0.1
+  google_sign_in: ^6.2.1
+
+  # ────────────────────────────────────────────────────────────────
+  # OCR / Camera
+  # ────────────────────────────────────────────────────────────────
+  google_mlkit_text_recognition: ^0.13.0
+  camera: ^0.11.0+1
+  image_picker: ^1.1.2
+  image_cropper: ^8.0.2
+
+  # ────────────────────────────────────────────────────────────────
+  # AI parsing (Gemini / OpenAI — swappable via abstraction)
+  # ────────────────────────────────────────────────────────────────
+  google_generative_ai: ^0.4.4
+  dio: ^5.5.0+1
+
+  # ────────────────────────────────────────────────────────────────
+  # Local persistence / offline support
+  # ────────────────────────────────────────────────────────────────
+  drift: ^2.19.1
+  sqlite3_flutter_libs: ^0.5.24
+  path_provider: ^2.1.3
+  path: ^1.9.0
+  connectivity_plus: ^6.0.3
+  shared_preferences: ^2.3.2
+
+  # ────────────────────────────────────────────────────────────────
+  # Contacts / export
+  # ────────────────────────────────────────────────────────────────
+  flutter_contacts: ^1.1.9+2
+  csv: ^6.0.0
+  pdf: ^3.11.0
+  printing: ^5.13.1
+  share_plus: ^9.0.0
+  permission_handler: ^11.3.1
+
+  # ────────────────────────────────────────────────────────────────
+  # Routing
+  # ────────────────────────────────────────────────────────────────
+  go_router: ^14.2.0
+
+  # ────────────────────────────────────────────────────────────────
+  # DI / functional helpers / models
+  # ────────────────────────────────────────────────────────────────
+  get_it: ^7.7.0
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.9.0
+  dartz: ^0.10.1
+  equatable: ^2.0.5
+  uuid: ^4.4.0
+
+  # ────────────────────────────────────────────────────────────────
+  # UI / animations / UX polish
+  # ────────────────────────────────────────────────────────────────
+  cupertino_icons: ^1.0.8
+  flutter_animate: ^4.5.0
+  lottie: ^3.1.2
+  shimmer: ^3.0.0
+  cached_network_image: ^3.3.1
+  google_fonts: ^6.2.1
+  flutter_svg: ^2.0.10+1
+  fluttertoast: ^8.2.6
+  flutter_slidable: ^3.1.1
+
+  # ────────────────────────────────────────────────────────────────
+  # Logging / diagnostics
+  # ────────────────────────────────────────────────────────────────
+  logger: ^2.4.0
+  firebase_crashlytics: ^4.0.1
+  connectivity_plus_platform_interface: ^2.0.1
+
+  # ────────────────────────────────────────────────────────────────
+  # Image processing / misc utilities
+  # ────────────────────────────────────────────────────────────────
+  image: ^4.2.0
+  intl: ^0.19.0
+  url_launcher: ^6.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+  # Code generation
+  build_runner: ^2.4.11
+  riverpod_generator: ^2.4.0
+  freezed: ^2.5.2
+  json_serializable: ^6.8.0
+  drift_dev: ^2.19.1
+
+  # Testing
+  mocktail: ^1.0.3
+  riverpod_test: ^0.0.4
+  golden_toolkit: ^0.15.0
+
+  # Play Store / App Store release assets
+  flutter_launcher_icons: ^0.14.1
+  flutter_native_splash: ^2.4.1
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icons/app_icon.png"
+  adaptive_icon_background: "#3D5AFE"
+  adaptive_icon_foreground: "assets/icons/app_icon_fg.png"
+  min_sdk_android: 21
+
+flutter_native_splash:
+  color: "#FFFFFF"
+  color_dark: "#101014"
+  image: "assets/icons/splash_logo.png"
+  image_dark: "assets/icons/splash_logo.png"
+  android_12:
+    image: "assets/icons/splash_logo.png"
+    icon_background_color: "#FFFFFF"
+    icon_background_color_dark: "#101014"
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+
+  # fonts:
+  #   - family: Poppins
+  #     fonts:
+  #       - asset: assets/fonts/Poppins-Regular.ttf
+  #       - asset: assets/fonts/Poppins-Bold.ttf
+  #         weight: 700
